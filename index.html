@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAHOLY | Central Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --violet: #8a2be2;
+            --blue: #00d4ff;
+            --white: #ffffff;
+            --bg: #030008;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Mametraka ny zava-drehetra eo afovoany */
+        }
+
+        /* --- BACKGROUND EFFECTS --- */
+        .glow-bg {
+            position: fixed;
+            width: 100vw; height: 100vh;
+            background: radial-gradient(circle at 50% 50%, #1a0033 0%, #030008 100%);
+            z-index: -2;
+        }
+
+        /* --- MENU --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .menu-btn { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
+        .menu-btn span { width: 25px; height: 3px; background: var(--blue); border-radius: 5px; }
+
+        /* --- HERO: MAHOLY FLAME --- */
+        header {
+            margin-top: 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .maholy-main {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 12vw, 6rem);
+            background: linear-gradient(to bottom, #fff, var(--blue), var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 10;
+        }
+
+        .flame {
+            position: absolute;
+            top: 0; left: 0; width: 100%;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(3rem, 12vw, 6rem);
+            background: linear-gradient(to top, var(--violet), var(--blue), transparent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: blur(15px);
+            animation: burn 1.5s infinite alternate;
+            z-index: 5;
+        }
+
+        @keyframes burn {
+            0% { transform: scaleY(1); opacity: 0.5; }
+            100% { transform: scaleY(1.3) translateY(-10px); opacity: 0.8; }
+        }
+
+        /* --- SEARCH --- */
+        .search-area {
+            width: 90%;
+            max-width: 500px;
+            margin: 40px 0;
+        }
+
+        #search {
+            width: 100%;
+            padding: 15px;
+            border-radius: 50px;
+            border: 2px solid var(--violet);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            text-align: center;
+            outline: none;
+        }
+
+        /* --- PROJECTS: CENTERED & MAHOLY EVERYWHERE --- */
+        .project-container {
+            width: 90%;
+            max-width: 500px; /* Tery kely mba ho hita tsara eo afovoany */
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding-bottom: 100px;
+        }
+
+        .project-card {
+            text-decoration: none;
+            color: white;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            text-align: center; /* Soratra rehetra eo afovoany */
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+            border-color: var(--blue);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+            background: rgba(138, 43, 226, 0.1);
+        }
+
+        .maholy-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--blue);
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .project-card h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+
+        .project-link {
+            font-weight: bold;
+            color: var(--violet);
+            font-size: 0.8rem;
+        }
+
+        footer {
+            padding: 40px;
+            opacity: 0.3;
+            letter-spacing: 10px;
+            font-size: 0.7rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg"></div>
+
+    <nav>
+        <div style="font-family: 'Orbitron'; color: var(--blue);">MAHOLY.LAB</div>
+        <div class="menu-btn">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <header>
+        <div class="maholy-main">MAHOLY</div>
+        <div class="flame">MAHOLY</div>
+        <p style="letter-spacing: 5px; color: var(--blue); font-size: 0.7rem;">OFFICIAL SHOWCASE</p>
+    </header>
+
+    <div class="search-area">
+        <input type="text" id="search" placeholder="HITADY TETIKASA..." onkeyup="filter()">
+    </div>
+
+    <main class="project-container" id="list">
+        
+        <a href="https://maholy.vercel.app" target="_blank" class="project-card" data-name="minuteur web">
+            <span class="maholy-tag">BY MAHOLY</span>
+            <h2>Minuteur Web</h2>
+            <p>Fitaovana futuristic hanarahana ny fotoana amin'ny fomba mivantana.</p>
+            <span class="project-link">Sokafy ny tetikasa ↗</span>
+        </a>
+
+        <a href="https://maholy-cv.vercel.app" target="_blank" class="project-card" data-name="portfolio">
+            <span class="maholy-tag">BY MAHOLY</span>
+            <h2>CV&Maholy</h2>
+            <p>Ny vavahadin'ny tetikasa rehetra novokarin'i Maholy.</p>
+            <span class="project-link">Sokafy ny tetikasa ↗</span>
+        </a>
+        <a href="https://scholl-gest.vercel.app" target="_blank" class="project-card" data-name="portfolio">
+            <span class="maholy-tag">BY MAHOLY</span>
+            <h2>Gestion des élève</h2>
+            <p>Ny vavahadin'ny tetikasa rehetra novokarin'i Maholy.</p>
+            <span class="project-link">Sokafy ny tetikasa ↗</span>
+        </a>
+        <a href="https://maholy-production.vercel.app" target="_blank" class="project-card" data-name="portfolio">
+            <span class="maholy-tag">BY MAHOLY</span>
+            <h2>Recette sakafo</h2>
+            <p>Ny vavahadin'ny tetikasa rehetra novokarin'i Maholy.</p>
+            <span class="project-link">Sokafy ny tetikasa ↗</span>
+        </a>
+    </main>
+
+    <footer>MAHOLY 2026</footer>
+
+    <script>
+        function filter() {
+            let val = document.getElementById('search').value.toLowerCase();
+            let cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                let name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(val) ? "block" : "none";
+            });
+        }
+    </script>
+</body>
+</html>
