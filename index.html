@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maholy Production - Violet Edition</title>
+    <style>
+        /* --- CSS (Loko Violet sy Animations) --- */
+        :root {
+            /* Loko VIOLET sy PINK ho an'ny style */
+            --primary-color: #b026ff; 
+            --secondary-color: #ff1493;
+            --bg-color: #0d0914; /* Mainty somary violet maizina */
+            --text-color: #f8fafc;
+            --card-bg: #1a1025;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(13, 9, 20, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(176, 38, 255, 0.2);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        /* RECHERCHE */
+        .search-container {
+            flex-grow: 1;
+            max-width: 450px;
+            margin: 0 20px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(176, 38, 255, 0.3);
+            background: var(--card-bg);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-container input:focus {
+            box-shadow: 0 0 15px rgba(176, 38, 255, 0.6);
+            border-color: var(--primary-color);
+        }
+
+        /* MENU BUTTON */
+        .menu-btn {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(176, 38, 255, 0.4);
+        }
+
+        .menu-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(176, 38, 255, 0.7);
+        }
+
+        /* MOBILE MENU */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 250px;
+            height: 100vh;
+            background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            padding: 60px 20px;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+            z-index: 999;
+            box-shadow: -5px 0 25px rgba(176, 38, 255, 0.2);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            margin: 15px 0;
+            font-size: 18px;
+            transition: color 0.3s, padding-left 0.3s;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary-color);
+            padding-left: 10px;
+        }
+
+        /* MAIN CONTENT & HERO */
+        main {
+            padding: 40px 5%;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(176, 38, 255, 0.5);
+        }
+
+        .hero-image-placeholder {
+            width: 100%;
+            max-width: 900px;
+            height: 350px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            margin: 30px auto;
+            overflow: hidden;
+            border: 2px solid rgba(176, 38, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .hero-image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image-placeholder:hover img {
+            transform: scale(1.05);
+        }
+
+        /* PROJECTS GRID */
+        .projects-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .projects-header h2 {
+            display: inline-block;
+            font-size: 2.2rem;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* PROJECT CARDS ANIMATION */
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(176, 38, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(176, 38, 255, 0.3);
+            border-color: rgba(176, 38, 255, 0.4);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        /* BOUTON VISITER SITE */
+        .visit-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .visit-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        /* ANIMATIONS KEYFRAMES */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* RESPONSIVE (Android / Mobile) */
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+            }
+            .search-container {
+                order: 3;
+                width: 100%;
+                max-width: 100%;
+                margin: 20px 0 0 0;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero-image-placeholder {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Maholy</div>
+        
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Tadiavo ny projet (ex: Portfolio, E-commerce)..." onkeyup="searchProducts()">
+        </div>
+
+        <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
+    </header>
+
+    <div class="mobile-menu" id="menu">
+        <a href="#" onclick="toggleMenu()">❌ Akatona</a>
+        <a href="#">Fandraisana</a>
+        <a href="#projects">Ny Asako (Projets)</a>
+        <a href="https://maholy-dev.vercel.app" target="_blank">Site ofisialy</a>
+    </div>
+
+    <main>
+        <section class="hero">
+            <h1>Maholy Production</h1>
+            <p>Ireo site web vokarikou par jour.</p>
+            
+            <div class="hero-image-placeholder">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Sary fanehoana violet">
+            </div>
+        </section>
+
+        <div class="projects-header" id="projects">
+            <h2>Ireo Vokatra sy Sites</h2>
+        </div>
+        
+        <div class="projects-grid" id="projectsGrid">
+            
+            <div class="project-card">
+                <img src="min.png" alt="Site 1">
+                <h3>Minuteur web</h3>
+                <p>site web minuteur sur web</p>
+                <a href="https://maholy.vercel.app" class="visit-btn" target="_blank">voir le site web</a>
+            </div>
+
+            <div class="project-card">
+                <img src="cv.png" alt="Site 2">
+                <h3>CV&Maholy</h3>
+                <p>Site web pour créer un CV professionel simple,rapide et efficace</p>
+                <a href="https://maholy-cv.vercel.app" class="visit-btn" target="_blank">Tsidiho ny site</a>
+            </div>
+
+            <div class="project-card">
+                <img src="gest.png" alt="Site 3">
+                <h3>Gestion des élève </h3>
+                <p>platforme de gestion scolaire : élèves,paiements</p>
+                <a href="https://scholl-gest.vercel.app" class="visit-btn" target="_blank">Tsidiho ny site</a>
+            </div>
+
+            <div class="project-card">
+                <img src="" alt="Site 4">
+                <h3>site en cour de creation</h3>
+                <p>Site web en cour de création.</p>
+                <a href="https://maholy-dev.vercel.app" class="visit-btn" target="_blank">Tsidiho ny site</a>
+            </div>
+
+            <div class="project-card">
+                <img src="bu.png" alt="Site 5">
+                <h3>bulletin de note </h3>
+                <p>suivi facile et rapide des bulletins de notes des élève</p>
+                <a href="https://maholy-bulletin.vercel.app" class="visit-btn" target="_blank">Tsidiho ny site</a>
+            </div>
+
+            <div class="project-card">
+                <img src="sak.png" alt="Site 6">
+                <h3>Recette sakafo</h3>
+                <p>Découvrez des recettes faciles et rapide pour tous les gouts</p>
+                <a href="https://maholy-production.vercel.app" class="visit-btn" target="_blank">Tsidiho ny site</a>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+
+        function searchProducts() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.project-card');
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const desc = card.querySelector('p').innerText.toLowerCase();
+                
+                if (title.includes(input) || desc.includes(input)) {
+                    card.style.display = "block";
+                    // Ampiana animation kely ilay recherche
+                    card.style.animation = "slideUp 0.5s ease-out";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
