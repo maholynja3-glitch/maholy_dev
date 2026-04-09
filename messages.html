@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages - Maholy-Dev</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #030014;
+            --accent-color: #7c3aed;
+            --secondary-color: #3b82f6;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+        body.light-mode {
+            --bg-color: #ffffff; --accent-color: #6d28d9; --secondary-color: #2563eb; --text-color: #1f2937; --card-bg: rgba(0, 0, 0, 0.05);
+        }
+        body, html {
+            margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif;
+            background: var(--bg-color); color: var(--text-color); overflow-x: hidden;
+            display: flex; justify-content: center; padding-bottom: 70px; padding-top: 60px;
+        }
+        header, .bottom-nav {
+            position: fixed; width: 100%; max-width: 500px; left: 50%; transform: translateX(-50%); z-index: 1000;
+        }
+        header { top: 0; height: 60px; background: rgba(3, 0, 20, 0.8); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; border-bottom: 1px solid var(--accent-color); }
+        .bottom-nav { bottom: 0; height: 65px; background: rgba(3, 0, 20, 0.9); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid var(--accent-color); }
+        .nav-item { text-decoration: none; color: rgba(255,255,255,0.5); text-align: center; font-size: 0.7rem; transition: 0.3s; }
+        .nav-item i { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+        .nav-item.active { color: var(--accent-color); }
+        #clock { font-family: 'Orbitron', sans-serif; color: var(--accent-color); font-size: 0.9rem; }
+        .container { padding: 20px; width: 100%; max-width: 500px; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--accent-color); margin-bottom: 20px; }
+        
+        /* Chat Box */
+        #chat-box { height: 400px; overflow-y: auto; background: var(--card-bg); border-radius: 15px; padding: 15px; border: 1px solid var(--accent-color); margin-bottom: 15px; }
+        .msg { margin-bottom: 10px; padding: 10px; border-radius: 10px; max-width: 80%; font-size: 0.9rem; }
+        .msg.received { background: rgba(255,255,255,0.1); align-self: flex-start; }
+        .msg.sent { background: var(--accent-color); color: white; margin-left: auto; }
+        .input-area { display: flex; gap: 10px; }
+        input { flex: 1; background: rgba(0,0,0,0.3); border: 1px solid var(--accent-color); color: white; border-radius: 10px; padding: 10px; outline: none; }
+        .btn-send { background: var(--accent-color); border: none; color: white; padding: 10px 20px; border-radius: 10px; cursor: pointer; }
+
+        [data-lang="mg"] { display: none; }
+        body.lang-mg [data-lang="fr"] { display: none; }
+        body.lang-mg [data-lang="mg"] { display: inline; }
+    </style>
+</head>
+<body class="dark-mode">
+    <header>
+        <div id="clock">00:00:00</div>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="toggleLang('fr')" style="background:none; border:1px solid var(--accent-color); color:white; cursor:pointer;">FR</button>
+            <button onclick="toggleLang('mg')" style="background:none; border:1px solid var(--accent-color); color:white; cursor:pointer;">MG</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">
+            <span data-lang="fr">Messages</span><span data-lang="mg">Hafatra</span>
+        </h2>
+        <div id="chat-box">
+            <div class="msg received">Salama! Manahoana?</div>
+            <div class="msg sent">Salama! Tsara be ny tranonkalanao.</div>
+        </div>
+        <div class="input-area">
+            <input type="text" placeholder="...">
+            <button class="btn-send"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span data-lang="fr">Accueil</span><span data-lang="mg">Fandraisana</span>
+        </a>
+        <a href="projets.html" class="nav-item">
+            <i class="fas fa-code"></i>
+            <span data-lang="fr">Projets</span><span data-lang="mg">Tetikasa</span>
+        </a>
+        <a href="about.html" class="nav-item">
+            <i class="fas fa-info-circle"></i>
+            <span data-lang="fr">À propos</span><span data-lang="mg">Momba</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <div style="width:20px; height:20px; border-radius:50%; background:url('IMAGE.jpg') center/cover; margin: 0 auto 4px; border: 1px solid var(--accent-color);"></div>
+            <span data-lang="fr">Moi</span><span data-lang="mg">Izaho</span>
+        </a>
+    </nav>
+
+    <script>
+        function updateTime() {
+            const options = { timeZone: 'Indian/Antananarivo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('clock').innerHTML = new Date().toLocaleTimeString('fr-FR', options);
+        }
+        setInterval(updateTime, 1000); updateTime();
+
+        function toggleLang(lang) {
+            if(lang === 'mg') document.body.classList.add('lang-mg');
+            else document.body.classList.remove('lang-mg');
+            localStorage.setItem('lang', lang);
+        }
+        if(localStorage.getItem('lang') === 'mg') toggleLang('mg');
+    </script>
+</body>
+</html>

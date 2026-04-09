@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Flamme Violette</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #030014;
+            --accent-color: #7c3aed;
+            --secondary-color: #3b82f6;
+            --text-color: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- Arrière-plan Aurora Moderne --- */
+        body::before, body::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: meshMove 20s infinite alternate;
+        }
+
+        body::before {
+            background: var(--accent-color);
+            top: -100px;
+            left: -100px;
+        }
+
+        body::after {
+            background: var(--secondary-color);
+            bottom: -100px;
+            right: -100px;
+            animation-delay: -10s;
+        }
+
+        @keyframes meshMove {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
+        }
+
+        /* --- Animation Photo --- */
+        .profile-photo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: url('IMAGE.jpg') center/cover no-repeat; /* Natao 'cover' mba ho feno tsara */
+            border: 2px solid var(--accent-color);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+        }
+
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 10px var(--accent-color); transform: scale(1); }
+            to { box-shadow: 0 0 25px var(--secondary-color); transform: scale(1.05); }
+        }
+
+        /* --- Formulaire d'inscription --- */
+        #form-container {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid var(--accent-color);
+            backdrop-filter: blur(40px);
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+            width: 300px;
+            text-align: center;
+            animation: fadeInContainer 1s ease-out;
+            transition: box-shadow 0.3s ease; /* Mbola tazomina ny transition ho an'ny box-shadow raha misy */
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            margin-bottom: 8px;
+            color: #fff;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            font-size: 1.8rem;
+            text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--secondary-color);
+            animation: textGlow 3s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 10px var(--accent-color), 0 0 20px var(--secondary-color); }
+            to { text-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--secondary-color); }
+        }
+
+        .brand-subtitle {
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.6);
+            animation: fadeInText 1.5s ease-out;
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            position: absolute;
+            left: 14px;
+            top: 14px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            transition: 0.3s ease all;
+            pointer-events: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 14px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.5);
+            transition: 0.3s;
+            z-index: 5;
+        }
+
+        input:focus + label,
+        input:not(:placeholder-shown) + label {
+            top: -12px;
+            left: 10px;
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            background: var(--bg-color);
+            padding: 0 5px;
+            opacity: 1;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 45px 14px 14px; /* Augmentation du padding à droite pour l'icône */
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            outline: none;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            background-size: 200% 100%;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-position: right center; /* Déplace le dégradé */
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 25px var(--secondary-color);
+        }
+
+        .link-text {
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        .link-text a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .link-text a:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Formulaire -->
+    <div id="form-container">
+        <div class="profile-photo"></div>
+        <h2>INSCRIPTION</h2>
+        <p class="brand-subtitle">sur <strong>maholy-dev</strong></p>
+        <form id="registrationForm">
+            <div class="input-group">
+                <input type="text" id="fullName" placeholder=" " required>
+                <label for="fullName">Nom Complet</label>
+            </div>
+            <div class="input-group">
+                <input type="email" id="email" placeholder=" " required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder=" " required>
+                <label for="password">Mot de passe</label>
+                <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+            </div>
+            <button type="submit">S'inscrire</button>
+        </form>
+        <p class="link-text">Déjà un compte ? <a href="login.html">Connectez-vous ici</a></p>
+    </div>
+
+    <script type="module">
+        import { signUpUser } from './auth.js';
+
+        // Gestion du bouton pour voir le mot de passe
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fullName = e.target.querySelector('input[type="text"]').value;
+            const email = e.target.querySelector('input[type="email"]').value;
+            const password = e.target.querySelector('input[type="password"]').value;
+            
+            const { data, error } = await signUpUser(email, password, fullName);
+
+            if (error) {
+                alert("Erreur : " + error.message);
+            } else {
+                alert("Inscription réussie ! Un e-mail de confirmation a été envoyé. Vous allez être redirigé vers la page de connexion.");
+                window.location.href = 'login.html'; // Redirige vers la page de connexion
+            }
+        });
+    </script>
+</body>
+</html>

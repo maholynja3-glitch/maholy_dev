@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets - Maholy-Dev</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #030014; --accent-color: #7c3aed; --secondary-color: #3b82f6; --text-color: #ffffff; --card-bg: rgba(255, 255, 255, 0.03);
+        }
+        body.light-mode {
+            --bg-color: #ffffff; --accent-color: #6d28d9; --secondary-color: #2563eb; --text-color: #1f2937; --card-bg: rgba(0, 0, 0, 0.05);
+        }
+        body, html {
+            margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif;
+            background: var(--bg-color); color: var(--text-color); overflow-x: hidden;
+            display: flex; justify-content: center;
+        }
+        body::before, body::after {
+            content: ""; position: absolute; width: 400px; height: 400px; border-radius: 50%; filter: blur(80px); z-index: -1; opacity: 0.3; animation: meshMove 20s infinite alternate;
+        }
+        body::before { background: var(--accent-color); top: -50px; left: -50px; }
+        body::after { background: var(--secondary-color); bottom: 50px; right: -50px; animation-delay: -10s; }
+        @keyframes meshMove { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(50px, 30px) scale(1.1); } }
+
+        header, .bottom-nav { position: fixed; width: 100%; max-width: 500px; left: 50%; transform: translateX(-50%); z-index: 1000; }
+        header { top: 0; height: 60px; background: rgba(3, 0, 20, 0.9); backdrop-filter: blur(10px); display: flex; justify-content: space-between; align-items: center; padding: 0 20px; box-sizing: border-box; border-bottom: 1px solid var(--accent-color); }
+        .bottom-nav { bottom: 0; height: 65px; background: rgba(3, 0, 20, 0.9); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid var(--accent-color); }
+        .nav-item { text-decoration: none; color: rgba(255,255,255,0.5); text-align: center; font-size: 0.7rem; transition: 0.3s; }
+        .nav-item i { font-size: 1.2rem; display: block; margin-bottom: 4px; }
+        .nav-item.active { color: var(--accent-color); }
+        #clock { font-family: 'Orbitron', sans-serif; color: var(--accent-color); font-size: 0.9rem; }
+        
+        .container { padding: 80px 20px 100px 20px; width: 100%; max-width: 500px; min-height: 100vh; background: rgba(255, 255, 255, 0.01); }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: var(--accent-color); margin-bottom: 20px; }
+        .site-card { background: var(--card-bg); border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1); margin-bottom: 15px; padding: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transition: 0.3s; }
+        .site-card:hover { border-color: var(--secondary-color); transform: scale(1.02); }
+        .site-info h3 { margin: 0; font-size: 1.1rem; color: var(--secondary-color); }
+
+        [data-lang="mg"] { display: none; }
+        body.lang-mg [data-lang="fr"] { display: none; }
+        body.lang-mg [data-lang="mg"] { display: inline; }
+    </style>
+</head>
+<body class="dark-mode">
+    <header>
+        <div id="clock">00:00:00</div>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="toggleLang('fr')" style="background:none; border:1px solid var(--accent-color); color:white; cursor:pointer; padding: 2px 8px; border-radius: 4px;">FR</button>
+            <button onclick="toggleLang('mg')" style="background:none; border:1px solid var(--accent-color); color:white; cursor:pointer; padding: 2px 8px; border-radius: 4px;">MG</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">
+            <span data-lang="fr">Mes Projets</span>
+            <span data-lang="mg">Ireo Tetikasako</span>
+        </h2>
+        <div class="site-card">
+            <div class="site-info">
+                <h3>Application Mobile APK</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">
+                    <span data-lang="fr">Développement d'une interface mobile moderne.</span>
+                    <span data-lang="mg">Fampandrosoana interface mobile vaovao.</span>
+                </p>
+            </div>
+        </div>
+        <div class="site-card">
+            <div class="site-info">
+                <h3>Système Supabase</h3>
+                <p style="font-size: 0.9rem; opacity: 0.8;">
+                    <span data-lang="fr">Intégration d'une base de données temps réel.</span>
+                    <span data-lang="mg">Fampidirana tahiry angona amin'ny fotoana tena izy.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span data-lang="fr">Accueil</span><span data-lang="mg">Fandraisana</span>
+        </a>
+        <a href="projets.html" class="nav-item active">
+            <i class="fas fa-code"></i>
+            <span data-lang="fr">Projets</span><span data-lang="mg">Tetikasa</span>
+        </a>
+        <a href="about.html" class="nav-item">
+            <i class="fas fa-info-circle"></i>
+            <span data-lang="fr">À propos</span><span data-lang="mg">Momba</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <div style="width:20px; height:20px; border-radius:50%; background:url('IMAGE.jpg') center/cover; margin: 0 auto 4px; border: 1px solid var(--accent-color);"></div>
+            <span data-lang="fr">Moi</span><span data-lang="mg">Izaho</span>
+        </a>
+    </nav>
+
+    <script>
+        function updateTime() {
+            const options = { timeZone: 'Indian/Antananarivo', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('clock').innerHTML = new Date().toLocaleTimeString('fr-FR', options);
+        }
+        setInterval(updateTime, 1000); updateTime();
+
+        function toggleLang(lang) {
+            if(lang === 'mg') document.body.classList.add('lang-mg');
+            else document.body.classList.remove('lang-mg');
+            localStorage.setItem('lang', lang);
+        }
+        if(localStorage.getItem('lang') === 'mg') toggleLang('mg');
+    </script>
+</body>
+</html>
